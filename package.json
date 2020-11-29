@@ -18,6 +18,9 @@
     "react-scripts": "^3.4.4"
   },
   "dependencies": {
+    "@sentry/cli": "^1.59.0",
+    "@sentry/react": "^5.27.6",
+    "@sentry/tracing": "^5.27.6",
     "@vkontakte/icons": "^1.59.0",
     "@vkontakte/vk-bridge": "^2.3.0",
     "@vkontakte/vk-miniapps-deploy": "0.0.22",
