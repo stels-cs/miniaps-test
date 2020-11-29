@@ -19,7 +19,7 @@ jobs:
           PACKAGE_VERSION=$(node -p -e "require('./package.json').version")
           COMMIT_VERSION=$(git rev-parse --short HEAD)
           REACT_APP_VERSION=$PACKAGE_VERSION@$BRANCH_NAME-$COMMIT_VERSION
-          npm run build
+          REACT_APP_VERSION=$REACT_APP_VERSION npm run build
           ./node_modules/.bin/sentry-cli releases new "$REACT_APP_VERSION"
           ./node_modules/.bin/sentry-cli releases files "$REACT_APP_VERSION" upload-sourcemaps --rewrite build/static/js --url-prefix '~/static/js/'
           ./node_modules/.bin/sentry-cli releases set-commits "$REACT_APP_VERSION" --auto
