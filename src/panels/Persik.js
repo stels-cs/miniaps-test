@@ -21,7 +21,7 @@ const Persik = props => (
 		>
 			Persik
 		</PanelHeader>
-		<img onClick={window.fakeFunction} className="Persik" src={persik} alt="Persik The Cat"/>
+		<img onClick={() => window.fakeFunction()} className="Persik" src={persik} alt="Persik The Cat"/>
 	</Panel>
 );
 
