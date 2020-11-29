@@ -15,6 +15,10 @@ jobs:
           node-version: 12
       - run: npm ci
       - run: |
+          BRANCH_NAME=$(git symbolic-ref --short -q HEAD)
+          PACKAGE_VERSION=$(node -p -e "require('./package.json').version")
+          COMMIT_VERSION=$(git rev-parse --short HEAD)
+          REACT_APP_VERSION=$PACKAGE_VERSION@$BRANCH_NAME-$COMMIT_VERSION
           npm run build
           ./node_modules/.bin/sentry-cli releases new "$REACT_APP_VERSION"
           ./node_modules/.bin/sentry-cli releases files "$REACT_APP_VERSION" upload-sourcemaps --rewrite build/static/js --url-prefix '~/static/js/'
@@ -26,10 +30,6 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.sentry_auth_token }}
           SENTRY_ORG: nedzvetskiy
           SENTRY_PROJECT: miniaps-test
-          BRANCH_NAME: $(git symbolic-ref --short -q HEAD)
-          PACKAGE_VERSION: $(node -p -e "require('./package.json').version")
-          COMMIT_VERSION: $(git rev-parse --short HEAD)
-          REACT_APP_VERSION: $PACKAGE_VERSION@$BRANCH_NAME-$COMMIT_VERSION
       - run: npm run deploy
         env:
           MINI_APPS_ACCESS_TOKEN: ${{ secrets.access_token }}
