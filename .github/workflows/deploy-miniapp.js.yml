@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 12
-    - run: npm ci
-    - run: npm run build
-    - env:
-        MINI_APPS_ACCESS_TOKEN: ${{ secrets.access_token }}
-        MINI_APPS_APP_ID: ${{ secrets.app_id }}
-    - run: npm run deploy
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm run build
+      - run: npm run deploy
+        env:
+          MINI_APPS_ACCESS_TOKEN: ${{ secrets.access_token }}
+          MINI_APPS_APP_ID: ${{ secrets.app_id }}
